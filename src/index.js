@@ -15,7 +15,8 @@ if (!fs.existsSync("./settings/config.json") || argv.hasOwnProperty("reconfigure
     const config = {
         port: 3000,
         secret: sha256(moment().format("YYYY-MM-DDTHH:mm:SSZ")),
-        directories: [__dirname.replace(/src$/g, "")]
+        directories: [__dirname.replace(/src$/g, "")],
+        uid: getuid()
     };
     if (!fs.existsSync("./settings/")) {
         fs.mkdirSync("./settings");
@@ -31,10 +32,10 @@ const config = JSON.parse(fs.readFileSync("./settings/config.json"));
 if (process.platform === "win32") {
     console.log("Could not determine user, as we're running on Windows. Please run this as administrator!");
 } else {
-    if (process.getuid() === 0) {
+    if (process.getuid() === 0) & (config.uid === 0) {
         console.log("WARNING: Script run as root! This could be dangerous to the system!");
     } else {
-        console.log("Deployment server is not run as root!\nCheck which user is running it and if it has permissions to pull!\nUID " + process.getuid());
+        console.log("Deployment server is not run as root!\nCheck which user is running it and if it has permissions to pull!\nUID " + .config.uid());
     }
 }
 
@@ -88,7 +89,8 @@ app.all("*", (req, res) => {
 // process execution function
 const runCommand = (cmd, dir) => {
     return new Promise((resolve, reject) => {
-        exec(cmd, (err, stdout, stderr) => {
+        const option = config.uid: {uid: config.uid} ? {}
+        exec(cmd, option, (err, stdout, stderr) => {
             console.log("Executed command: " + cmd);
             if (err) {
                 reject(err);
