@@ -16,7 +16,7 @@ if (!fs.existsSync("./settings/config.json") || argv.hasOwnProperty("reconfigure
         port: 3000,
         secret: sha256(moment().format("YYYY-MM-DDTHH:mm:SSZ")),
         directories: [__dirname.replace(/src$/g, "")],
-        uid: getuid()
+        uid: process.getuid()
     };
     if (!fs.existsSync("./settings/")) {
         fs.mkdirSync("./settings");
