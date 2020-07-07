@@ -89,7 +89,7 @@ app.all("*", (req, res) => {
 // process execution function
 const runCommand = (cmd, dir) => {
     return new Promise((resolve, reject) => {
-        const option = config.uid: {uid: config.uid} ? {}
+        const option = config.uid ? {uid: config.uid} : {}
         exec(cmd, option, (err, stdout, stderr) => {
             console.log("Executed command: " + cmd);
             if (err) {
