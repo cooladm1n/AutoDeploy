@@ -35,7 +35,7 @@ if (process.platform === "win32") {
     if ((process.getuid() === 0) && (config.uid === 0)) {
         console.log("WARNING: Script run as root! This could be dangerous to the system!");
     } else {
-        console.log("Deployment server is not run as root!\nCheck which user is running it and if it has permissions to pull!\nUID " + .config.uid());
+        console.log("Deployment server is not run as root!\nCheck which user is running it and if it has permissions to pull!\nUID " + config.uid());
     }
 }
 
