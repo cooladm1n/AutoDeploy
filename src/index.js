@@ -32,7 +32,7 @@ const config = JSON.parse(fs.readFileSync("./settings/config.json"));
 if (process.platform === "win32") {
     console.log("Could not determine user, as we're running on Windows. Please run this as administrator!");
 } else {
-    if (process.getuid() === 0) && (config.uid === 0) {
+    if ((process.getuid() === 0) && (config.uid === 0)) {
         console.log("WARNING: Script run as root! This could be dangerous to the system!");
     } else {
         console.log("Deployment server is not run as root!\nCheck which user is running it and if it has permissions to pull!\nUID " + .config.uid());
